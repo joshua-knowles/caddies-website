@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Caddies</title>
+  <meta name="description" content="Ready when you are. Tell us about your event and we'll take it from there.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="container nav">
+      <a href="index.html" class="logo">CAD<span>DIES</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="packages-pricing.html">Packages &amp; Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Contact</span>
+        <h1>Ready when you are.</h1>
+        <p class="intro-line">Tell us about your event and we'll take it from there.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="contact-layout">
+          <div>
+
+            <div id="confirmation">
+              <p>Got it. We'll be on the bag from here — expect to hear from us soon.</p>
+            </div>
+
+            <div class="prefill-note" id="prefill-note">
+              <p>We've pre-filled this form based on your pricing calculator selections. Feel free to adjust anything before you send it through.</p>
+            </div>
+
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Name <span class="required">*</span></label>
+                  <input type="text" id="name" name="name" required placeholder="Your name">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email <span class="required">*</span></label>
+                  <input type="email" id="email" name="email" required placeholder="you@example.com">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">Phone <span class="optional">(optional)</span></label>
+                  <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+                </div>
+                <div class="form-group">
+                  <label for="company">Company <span class="optional">(optional)</span></label>
+                  <input type="text" id="company" name="company" placeholder="Your company">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="event-date">Event date <span class="required">*</span></label>
+                  <input type="date" id="event-date" name="event-date" required>
+                </div>
+                <div class="form-group">
+                  <label for="package">Package interest <span class="required">*</span></label>
+                  <select id="package" name="package" required>
+                    <option value="" disabled selected>Select a package</option>
+                    <option value="putter">The Putter / 3hr Weekday</option>
+                    <option value="wedge">The Wedge / 3hr Evening &amp; Weekend</option>
+                    <option value="7-iron">The 7 Iron / 5hr Half Day</option>
+                    <option value="driver">The Driver / 8hr Full Day</option>
+                    <option value="full-bag">The Full Bag / Custom</option>
+                    <option value="not-sure">Not sure yet</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="venue">Venue / location <span class="optional">(optional)</span></label>
+                <input type="text" id="venue" name="venue" placeholder="Where's your event?">
+              </div>
+
+              <div class="form-group">
+                <label for="details">Tell us about your round <span class="optional">(anything else we should know about your event)</span></label>
+                <textarea id="details" name="details" placeholder="Guest numbers, timings, anything else that helps us plan"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Preferred contact method</label>
+                <div class="radio-group">
+                  <div class="radio-option">
+                    <input type="radio" id="contact-email" name="contact-method" value="email" checked>
+                    <label for="contact-email">Email</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="contact-phone" name="contact-method" value="phone">
+                    <label for="contact-phone">Phone</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="contact-either" name="contact-method" value="either">
+                    <label for="contact-either">Either</label>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">Get in touch</button>
+            </form>
+
+            <div class="note-box">
+              <p>Our simulator requires a minimum 17×17ft floor space with 10ft ceiling clearance and access to a standard power outlet. No power on site? We can bring a generator.</p>
+            </div>
+
+          </div>
+
+          <div class="contact-info">
+            <div class="photo-placeholder" data-label="Caddies on site — photo coming soon" style="min-height: 260px;"></div>
+            <div class="contact-info-block">
+              <h3>Response time</h3>
+              <p>We aim to reply to every enquiry fast. Expect to hear from us within one business day.</p>
+            </div>
+            <div class="contact-info-block">
+              <h3>Based in</h3>
+              <p>Christchurch, New Zealand. Available for events across the wider region.</p>
+            </div>
+            <div class="contact-info-block">
+              <h3>Talk to Josh</h3>
+              <p><a href="mailto:hello@caddies.co.nz">hello@caddies.co.nz</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">CAD<span>DIES</span></a>
+          <p>The course, delivered. The caddie, included.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="packages-pricing.html">Packages &amp; Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="contact.html">Enquiry form</a></li>
+            <li>Christchurch, New Zealand</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Caddies. Christchurch's only mobile golf simulator.</p>
+        <p>Mobile golf simulator hire</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Packages &amp; Pricing — Caddies</title>
+  <meta name="description" content="Pick your club. Answer three quick questions and get an instant price estimate for your event.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="container nav">
+      <a href="index.html" class="logo">CAD<span>DIES</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="packages-pricing.html" class="active">Packages &amp; Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Packages &amp; Pricing</span>
+        <h1>Pick your club.</h1>
+        <p class="intro-line">Every package includes full setup and packdown. Answer three quick questions and we'll estimate your price.</p>
+      </div>
+    </section>
+
+    <section class="calculator-section">
+      <div class="container">
+
+        <div class="calculator-card" id="calculator-card">
+
+          <div class="calc-progress">
+            <button type="button" class="calc-progress-step active" data-goto="1">
+              <span>1</span> Event type
+            </button>
+            <button type="button" class="calc-progress-step" data-goto="2">
+              <span>2</span> Duration
+            </button>
+            <button type="button" class="calc-progress-step" data-goto="3">
+              <span>3</span> Guests
+            </button>
+          </div>
+
+          <div class="calc-step active" data-step="1">
+            <h3>What kind of event is it?</h3>
+            <div class="calc-options" data-group="eventType">
+              <button type="button" class="calc-option" data-value="corporate">Corporate</button>
+              <button type="button" class="calc-option" data-value="golf-club">Golf Club</button>
+              <button type="button" class="calc-option" data-value="festival">Festival / Activation</button>
+              <button type="button" class="calc-option" data-value="private">Private Party</button>
+              <button type="button" class="calc-option" data-value="other">Other</button>
+            </div>
+          </div>
+
+          <div class="calc-step" data-step="2">
+            <h3>How long do you need us for?</h3>
+            <div class="calc-options" data-group="duration">
+              <button type="button" class="calc-option" data-value="3">3 hours</button>
+              <button type="button" class="calc-option" data-value="5">5 hours</button>
+              <button type="button" class="calc-option" data-value="8">8 hours</button>
+              <button type="button" class="calc-option" data-value="custom">Custom</button>
+            </div>
+          </div>
+
+          <div class="calc-step" data-step="3">
+            <h3>Roughly how many guests?</h3>
+            <div class="calc-options" data-group="guests">
+              <button type="button" class="calc-option" data-value="under-20">Under 20</button>
+              <button type="button" class="calc-option" data-value="20-50">20–50</button>
+              <button type="button" class="calc-option" data-value="50-100">50–100</button>
+              <button type="button" class="calc-option" data-value="100-plus">100+</button>
+            </div>
+          </div>
+
+          <div class="calc-nav">
+            <button type="button" class="btn btn-secondary" id="calc-back" disabled>Back</button>
+          </div>
+
+        </div>
+
+        <div class="calc-result" id="calc-result" hidden>
+          <span class="eyebrow">Your estimate</span>
+          <h2 id="calc-headline">Your event is estimated between $700–$850</h2>
+          <p class="calc-note" id="calc-note">Based on your selections.</p>
+
+          <div class="calc-blur-wrap">
+            <div class="calc-blur-content">
+              <div class="calc-breakdown-item"><span>Simulator hire &amp; full setup</span><span>Included</span></div>
+              <div class="calc-breakdown-item"><span>On-site host, the whole time</span><span>Included</span></div>
+              <div class="calc-breakdown-item"><span>All game modes &amp; course library</span><span>Included</span></div>
+              <div class="calc-breakdown-item"><span>Full packdown</span><span>Included</span></div>
+              <div class="calc-breakdown-item"><span>Travel within 30km of CBD</span><span>Included</span></div>
+            </div>
+            <div class="calc-blur-overlay">
+              <button type="button" class="btn btn-primary" id="calc-cta">What's the next step?</button>
+            </div>
+          </div>
+
+          <button type="button" class="btn-ghost" id="calc-restart">Start over →</button>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="container">
+        <div class="small-print">
+          <p>Travel beyond 30km from Christchurch CBD and generator hire for remote sites may incur additional charges. We'll include everything in your quote.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <h2>Not sure which club to pull?</h2>
+        <p>Tell us about your event. We'll pull the right club for you.</p>
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">CAD<span>DIES</span></a>
+          <p>The course, delivered. The caddie, included.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="packages-pricing.html">Packages &amp; Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="contact.html">Enquiry form</a></li>
+            <li>Christchurch, New Zealand</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Caddies. Christchurch's only mobile golf simulator.</p>
+        <p>Mobile golf simulator hire</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/calculator.js"></script>
+</body>
+</html>
