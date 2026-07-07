@@ -66,6 +66,24 @@ document.addEventListener('DOMContentLoaded', function () {
   if (savedGate.name) gateNameInput.value = savedGate.name;
   if (savedGate.email) gateEmailInput.value = savedGate.email;
 
+  function submitGateLead(name, email) {
+    if (typeof GOOGLE_SCRIPT_URL === 'undefined') return;
+
+    var formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('source', 'Calculator Gate');
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    }).catch(function (err) {
+      // Best-effort background submission — never block or interrupt the gate flow.
+      console.error('Calculator gate lead submission failed:', err);
+    });
+  }
+
   gateForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = gateNameInput.value.trim();
@@ -73,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!name || !email) return;
 
     localStorage.setItem('caddiesGate', JSON.stringify({ name: name, email: email }));
+    submitGateLead(name, email);
 
     gate.classList.add('hidden');
     card.classList.remove('locked');

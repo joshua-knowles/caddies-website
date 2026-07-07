@@ -1271,6 +1271,27 @@ select {
   display: block;
 }
 
+.form-error {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--text-faint);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.form-error a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+.form-error.show {
+  display: block;
+}
+
 /* ============================================
    Footer
    ============================================ */
