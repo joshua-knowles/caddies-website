@@ -43,9 +43,19 @@ function applyCalculatorPrefill(form) {
     return;
   }
 
+  var nameField = form.querySelector('#name');
+  var emailField = form.querySelector('#email');
   var packageField = form.querySelector('#package');
   var detailsField = form.querySelector('#details');
   var note = document.getElementById('prefill-note');
+
+  if (nameField && data.name) {
+    nameField.value = data.name;
+  }
+
+  if (emailField && data.email) {
+    emailField.value = data.email;
+  }
 
   if (packageField && data.package) {
     packageField.value = data.package;

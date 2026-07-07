@@ -47,6 +47,40 @@ document.addEventListener('DOMContentLoaded', function () {
     'full-bag': 'The Full Bag / Custom'
   };
 
+  /* ---------- Gate ---------- */
+
+  var gate = document.getElementById('calc-gate');
+  var gateForm = document.getElementById('gate-form');
+  var gateNameInput = document.getElementById('gate-name');
+  var gateEmailInput = document.getElementById('gate-email');
+
+  function getGateData() {
+    try {
+      return JSON.parse(localStorage.getItem('caddiesGate') || 'null') || {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  var savedGate = getGateData();
+  if (savedGate.name) gateNameInput.value = savedGate.name;
+  if (savedGate.email) gateEmailInput.value = savedGate.email;
+
+  gateForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = gateNameInput.value.trim();
+    var email = gateEmailInput.value.trim();
+    if (!name || !email) return;
+
+    localStorage.setItem('caddiesGate', JSON.stringify({ name: name, email: email }));
+
+    gate.classList.add('hidden');
+    card.classList.remove('locked');
+    card.removeAttribute('aria-hidden');
+  });
+
+  /* ---------- Calculator steps ---------- */
+
   function goToStep(n) {
     currentStep = n;
     if (n > maxStepReached) maxStepReached = n;
@@ -99,54 +133,71 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  function computeEstimate() {
-    if (state.guests === '100-plus') {
-      return { needsQuote: true, pkg: 'full-bag' };
-    }
-    if (state.duration === 'custom') {
-      return { low: 1750, high: null, pkg: 'full-bag' };
+  /* ---------- Pricing ---------- */
+
+  function isLargeOrCustom() {
+    return state.guests === '100-plus' || state.duration === 'custom';
+  }
+
+  function computePriceRange() {
+    if (isLargeOrCustom()) {
+      return { low: 1750, high: null };
     }
     var tiers = {
-      '3': { low: 700, high: 850, pkg: state.eventType === 'corporate' ? 'putter' : 'wedge' },
-      '5': { low: 1200, high: 1200, pkg: '7-iron' },
-      '8': { low: 1750, high: 1750, pkg: 'driver' }
+      '3': { low: 700, high: 850 },
+      '5': { low: 850, high: 1200 },
+      '8': { low: 1200, high: 1750 }
     };
     return tiers[state.duration];
+  }
+
+  function getPackage() {
+    if (isLargeOrCustom()) return 'full-bag';
+    var map = {
+      '3': state.eventType === 'corporate' ? 'putter' : 'wedge',
+      '5': '7-iron',
+      '8': 'driver'
+    };
+    return map[state.duration];
   }
 
   function formatMoney(n) {
     return '$' + n.toLocaleString('en-NZ');
   }
 
-  function formatHeadline(estimate) {
-    if (estimate.needsQuote) return 'Your event calls for a custom quote.';
-    if (estimate.high === null) return 'Your event is estimated from ' + formatMoney(estimate.low) + '+';
-    if (estimate.low === estimate.high) return 'Your event is estimated at ' + formatMoney(estimate.low);
-    return 'Your event is estimated between ' + formatMoney(estimate.low) + '–' + formatMoney(estimate.high);
+  function formatHeadline(range) {
+    if (range.high === null) return 'Your event is estimated from ' + formatMoney(range.low) + '+';
+    if (range.low === range.high) return 'Your event is estimated at ' + formatMoney(range.low);
+    return 'Your event is estimated between ' + formatMoney(range.low) + '–' + formatMoney(range.high);
   }
 
   function showResult() {
-    var estimate = computeEstimate();
+    var range = computePriceRange();
+    var pkg = getPackage();
 
-    headlineEl.textContent = formatHeadline(estimate);
+    headlineEl.textContent = formatHeadline(range);
     noteEl.textContent = 'Based on a ' + EVENT_TYPE_LABELS[state.eventType] + ' event, ' +
       DURATION_LABELS[state.duration] + ', for ' + GUEST_LABELS[state.guests] + ' guests.';
 
     card.style.display = 'none';
+    gate.style.display = 'none';
     resultEl.hidden = false;
     resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     ctaBtn.onclick = function () {
+      var gateData = getGateData();
       var payload = {
+        name: gateData.name || '',
+        email: gateData.email || '',
         eventType: state.eventType,
         eventTypeLabel: EVENT_TYPE_LABELS[state.eventType],
         duration: state.duration,
         durationLabel: DURATION_LABELS[state.duration],
         guests: state.guests,
         guestsLabel: GUEST_LABELS[state.guests],
-        package: estimate.pkg,
-        packageLabel: PACKAGE_LABELS[estimate.pkg],
-        priceLabel: formatHeadline(estimate)
+        package: pkg,
+        packageLabel: PACKAGE_LABELS[pkg],
+        priceLabel: formatHeadline(range)
       };
       localStorage.setItem('caddiesCalculator', JSON.stringify(payload));
       window.location.href = 'contact.html#contact-form';
@@ -162,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     resultEl.hidden = true;
     card.style.display = '';
+    gate.style.display = '';
     goToStep(1);
     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
