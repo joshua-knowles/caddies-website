@@ -20,6 +20,8 @@ var HEADERS = [
   'Source'
 ];
 
+var HOT_LEAD_COLOR = '#ffff00';
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -27,6 +29,7 @@ function doPost(e) {
   try {
     var sheet = getSheet_();
     var params = (e && e.parameter) || {};
+    var source = params.source || 'Contact Form';
 
     sheet.appendRow([
       new Date(),
@@ -39,8 +42,15 @@ function doPost(e) {
       params.venue || '',
       params.details || '',
       params['contact-method'] || '',
-      params.source || 'Contact Form'
+      source
     ]);
+
+    // Full contact form submissions are hot leads — highlight the row.
+    // Calculator-gate-only submissions stay unhighlighted.
+    if (source !== 'Calculator Gate') {
+      var rowIndex = sheet.getLastRow();
+      sheet.getRange(rowIndex, 1, 1, HEADERS.length).setBackground(HOT_LEAD_COLOR);
+    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ result: 'success' }))

@@ -44,26 +44,7 @@
 
         <div class="calculator-wrap" id="calculator">
 
-          <div class="calc-gate" id="calc-gate">
-            <div class="calc-gate-card">
-              <span class="eyebrow">Quick start</span>
-              <h3>Unlock the calculator</h3>
-              <p>Pop in your name and email and we'll get your estimate ready.</p>
-              <form id="gate-form" novalidate>
-                <div class="form-group">
-                  <label for="gate-name">Name</label>
-                  <input type="text" id="gate-name" name="gate-name" required placeholder="Your name">
-                </div>
-                <div class="form-group">
-                  <label for="gate-email">Email</label>
-                  <input type="email" id="gate-email" name="gate-email" required placeholder="you@example.com">
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Unlock the calculator</button>
-              </form>
-            </div>
-          </div>
-
-        <div class="calculator-card locked" id="calculator-card" aria-hidden="true">
+        <div class="calculator-card" id="calculator-card">
 
           <div class="calc-progress">
             <button type="button" class="calc-progress-step active" data-goto="1">
@@ -118,23 +99,44 @@
 
         <div class="calc-result" id="calc-result" hidden>
           <span class="eyebrow">Your estimate</span>
-          <h2 id="calc-headline">Your event is estimated between $700–$850</h2>
-          <p class="calc-note" id="calc-note">Based on your selections.</p>
 
-          <div class="calc-blur-wrap">
-            <div class="calc-blur-content">
-              <div class="calc-breakdown-item"><span>Simulator hire &amp; full setup</span><span>Included</span></div>
-              <div class="calc-breakdown-item"><span>On-site host, the whole time</span><span>Included</span></div>
-              <div class="calc-breakdown-item"><span>All game modes &amp; course library</span><span>Included</span></div>
-              <div class="calc-breakdown-item"><span>Full packdown</span><span>Included</span></div>
-              <div class="calc-breakdown-item"><span>Travel within 30km of CBD</span><span>Included</span></div>
+          <div class="calc-blur-wrap" id="calc-blur-wrap">
+            <div class="calc-blur-content" id="calc-blur-content">
+              <h2 id="calc-headline">Your event is estimated between $700–$850</h2>
+              <p class="calc-note" id="calc-note">Based on your selections.</p>
+              <div class="calc-breakdown">
+                <div class="calc-breakdown-item"><span>Simulator hire &amp; full setup</span><span>Included</span></div>
+                <div class="calc-breakdown-item"><span>On-site host, the whole time</span><span>Included</span></div>
+                <div class="calc-breakdown-item"><span>All game modes &amp; course library</span><span>Included</span></div>
+                <div class="calc-breakdown-item"><span>Full packdown</span><span>Included</span></div>
+                <div class="calc-breakdown-item"><span>Travel within 30km of CBD</span><span>Included</span></div>
+              </div>
             </div>
-            <div class="calc-blur-overlay">
-              <button type="button" class="btn btn-primary" id="calc-cta">Calculate your quote.</button>
+            <div class="calc-blur-overlay" id="calc-gate-overlay">
+              <div class="calc-gate-card">
+                <span class="eyebrow">Almost there</span>
+                <h3>Unlock your price</h3>
+                <p>Pop in your name and email and we'll reveal your estimate.</p>
+                <form id="gate-form" novalidate>
+                  <div class="form-group">
+                    <label for="gate-name">Name</label>
+                    <input type="text" id="gate-name" name="gate-name" required placeholder="Your name">
+                  </div>
+                  <div class="form-group">
+                    <label for="gate-email">Email</label>
+                    <input type="email" id="gate-email" name="gate-email" required placeholder="you@example.com">
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Reveal my price</button>
+                </form>
+              </div>
             </div>
           </div>
 
-          <button type="button" class="btn-ghost" id="calc-restart">Start over →</button>
+          <div class="calc-actions">
+            <button type="button" class="btn btn-primary" id="calc-next-step" hidden>What's the next step?</button>
+
+            <button type="button" class="btn-ghost" id="calc-restart">Start over →</button>
+          </div>
         </div>
 
       </div>
@@ -149,46 +151,46 @@
         <div class="package-detail-grid">
           <div class="package-detail-card">
             <div class="package-detail-header">
-              <h3>The Putter</h3>
+              <h3>3hr Weekday</h3>
               <span class="package-detail-price">from $700</span>
             </div>
-            <div class="package-meta">3 hours, weekday</div>
+            <div class="package-meta">The Putter</div>
             <p class="desc">3 hours, weekday. Perfect for corporate events, client entertaining and staff dos. If you've got a daytime slot to fill, this is a great place to start.</p>
           </div>
 
           <div class="package-detail-card">
             <div class="package-detail-header">
-              <h3>The Wedge</h3>
+              <h3>3hr Evening &amp; Weekend</h3>
               <span class="package-detail-price">from $850</span>
             </div>
-            <div class="package-meta">3 hours, evening or weekend</div>
+            <div class="package-meta">The Wedge</div>
             <p class="desc">3 hours, evening or weekend. Great for after-work functions, private parties and anything that kicks off once the work day is done.</p>
           </div>
 
           <div class="package-detail-card">
             <div class="package-detail-header">
-              <h3>The 7 Iron</h3>
+              <h3>5hr Half Day</h3>
               <span class="package-detail-price">from $1,200</span>
             </div>
-            <div class="package-meta">5hr Half Day</div>
+            <div class="package-meta">The Iron</div>
             <p class="desc">5 hours. A solid middle ground for events that need a bit more room to breathe. Golf club socials, charity days, longer activations and beyond.</p>
           </div>
 
           <div class="package-detail-card">
             <div class="package-detail-header">
-              <h3>The Driver</h3>
+              <h3>8hr Full Day</h3>
               <span class="package-detail-price">from $1,750</span>
             </div>
-            <div class="package-meta">8hr Full Day</div>
+            <div class="package-meta">The Driver</div>
             <p class="desc">8 hours. For when you want to go big. Festivals, full-day corporate events and anything that needs a serious centrepiece.</p>
           </div>
 
           <div class="package-detail-card full-bag">
             <div>
               <div class="package-detail-header">
-                <h3>The Full Bag</h3>
+                <h3>Custom</h3>
               </div>
-              <div class="package-meta">Multi-day hires &amp; large-scale events</div>
+              <div class="package-meta">The Full Bag</div>
               <p class="desc">Multi-day hires, remote venues and large-scale events. If you're planning something bigger or more complex, this is where we start. Every Full Bag booking is scoped and quoted individually so you get exactly what your event needs. Tell us what you're planning and we'll put something together.</p>
             </div>
             <a href="contact.html" class="btn btn-secondary">Get in Touch</a>

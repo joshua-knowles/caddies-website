@@ -5,9 +5,13 @@ document.addEventListener('DOMContentLoaded', function () {
   var resultEl = document.getElementById('calc-result');
   var backBtn = document.getElementById('calc-back');
   var restartBtn = document.getElementById('calc-restart');
-  var ctaBtn = document.getElementById('calc-cta');
   var headlineEl = document.getElementById('calc-headline');
   var noteEl = document.getElementById('calc-note');
+  var blurContent = document.getElementById('calc-blur-content');
+  var nextStepBtn = document.getElementById('calc-next-step');
+
+  var currentRange = null;
+  var currentPkg = null;
 
   var progressSteps = card.querySelectorAll('.calc-progress-step');
   var steps = card.querySelectorAll('.calc-step');
@@ -40,16 +44,16 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   var PACKAGE_LABELS = {
-    'putter': 'The Putter / 3hr Weekday',
-    'wedge': 'The Wedge / 3hr Evening & Weekend',
-    '7-iron': 'The 7 Iron / 5hr Half Day',
-    'driver': 'The Driver / 8hr Full Day',
-    'full-bag': 'The Full Bag / Custom'
+    'putter': '3hr Weekday / The Putter',
+    'wedge': '3hr Evening & Weekend / The Wedge',
+    '7-iron': '5hr Half Day / The Iron',
+    'driver': '8hr Full Day / The Driver',
+    'full-bag': 'Custom / The Full Bag'
   };
 
   /* ---------- Gate ---------- */
 
-  var gate = document.getElementById('calc-gate');
+  var gateOverlay = document.getElementById('calc-gate-overlay');
   var gateForm = document.getElementById('gate-form');
   var gateNameInput = document.getElementById('gate-name');
   var gateEmailInput = document.getElementById('gate-email');
@@ -93,9 +97,29 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('caddiesGate', JSON.stringify({ name: name, email: email }));
     submitGateLead(name, email);
 
-    gate.classList.add('hidden');
-    card.classList.remove('locked');
-    card.removeAttribute('aria-hidden');
+    // Permanently reveal the frosted price — stays revealed, no auto-advance.
+    gateOverlay.classList.add('hidden');
+    blurContent.classList.add('revealed');
+    nextStepBtn.hidden = false;
+  });
+
+  nextStepBtn.addEventListener('click', function () {
+    var gateData = getGateData();
+    var payload = {
+      name: gateData.name || '',
+      email: gateData.email || '',
+      eventType: state.eventType,
+      eventTypeLabel: EVENT_TYPE_LABELS[state.eventType],
+      duration: state.duration,
+      durationLabel: DURATION_LABELS[state.duration],
+      guests: state.guests,
+      guestsLabel: GUEST_LABELS[state.guests],
+      package: currentPkg,
+      packageLabel: PACKAGE_LABELS[currentPkg],
+      priceLabel: formatHeadline(currentRange)
+    };
+    localStorage.setItem('caddiesCalculator', JSON.stringify(payload));
+    window.location.href = 'contact.html#contact-form';
   });
 
   /* ---------- Calculator steps ---------- */
@@ -191,36 +215,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function showResult() {
-    var range = computePriceRange();
-    var pkg = getPackage();
+    currentRange = computePriceRange();
+    currentPkg = getPackage();
 
-    headlineEl.textContent = formatHeadline(range);
+    headlineEl.textContent = formatHeadline(currentRange);
     noteEl.textContent = 'Based on a ' + EVENT_TYPE_LABELS[state.eventType] + ' event, ' +
       DURATION_LABELS[state.duration] + ', for ' + GUEST_LABELS[state.guests] + ' guests.';
 
     card.style.display = 'none';
-    gate.style.display = 'none';
     resultEl.hidden = false;
     resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    ctaBtn.onclick = function () {
-      var gateData = getGateData();
-      var payload = {
-        name: gateData.name || '',
-        email: gateData.email || '',
-        eventType: state.eventType,
-        eventTypeLabel: EVENT_TYPE_LABELS[state.eventType],
-        duration: state.duration,
-        durationLabel: DURATION_LABELS[state.duration],
-        guests: state.guests,
-        guestsLabel: GUEST_LABELS[state.guests],
-        package: pkg,
-        packageLabel: PACKAGE_LABELS[pkg],
-        priceLabel: formatHeadline(range)
-      };
-      localStorage.setItem('caddiesCalculator', JSON.stringify(payload));
-      window.location.href = 'contact.html#contact-form';
-    };
   }
 
   restartBtn.addEventListener('click', function () {
@@ -232,7 +236,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     resultEl.hidden = true;
     card.style.display = '';
-    gate.style.display = '';
+    gateOverlay.classList.remove('hidden');
+    blurContent.classList.remove('revealed');
+    nextStepBtn.hidden = true;
     goToStep(1);
     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
