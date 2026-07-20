@@ -1,0 +1,6 @@
+# TEMPORARY — site is not yet live.
+# Remove this Disallow rule (and the noindex meta tags on every page)
+# once the site is ready to go live and be indexed.
+
+User-agent: *
+Disallow: /
