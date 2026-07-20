@@ -209,15 +209,8 @@ p {
   font-family: var(--font-display);
   font-size: 1.3rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.02em;
   color: var(--text);
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.logo span {
-  color: var(--accent);
 }
 
 .nav-links {
